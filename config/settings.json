@@ -1,0 +1,12 @@
+{
+	"prefix": ".",
+	"welcome": {
+		"welcomeChannel": 877613158477492294,
+		"welcomeRole": 876213742721974302
+	},
+	"help": {
+		"embedColor": "#6e246a"
+	},
+	"errorMessagesDeleteAfter": 10000,
+	"commandMessageDeleteAfter": 0
+}

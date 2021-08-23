@@ -1,0 +1,16 @@
+{
+	"name": "discord.js-bot-template-master",
+	"version": "1.0.0",
+	"description": "basic bot template with command handler",
+	"main": "app.js",
+	"scripts": {
+		"start": "node main.js",
+    "debug": "nodemon main.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"discord.js": "^13.1.0"
+	}
+}
