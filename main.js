@@ -62,12 +62,12 @@ client.on("ready", async () => {
 client.on("guildMemberAdd", (member) => {
 	console.log("User" + member.user.tag + "has joined the server!");
 
-	var role = member.guild.roles.find((role) => role.id == settings.welcome.welcomeRole);
+	var role = member.guild.roles.cache.find((role) => role.id == settings.welcome.welcomeRole);
 
-	client.channels.find((ch) => ch.name == config.welcome.welcomeChannel).send("Welcome " + member.username);
+	member.guild.channels.cache.find((ch) => ch.id == settings.welcome.welcomeChannel).send(`Welcome ${member}`);
 
 	setTimeout(function () {
-		member.addRole(role);
+		member.roles.add(role);
 	}, 10000);
 });
 
@@ -88,10 +88,10 @@ client.on("messageCreate", async (message) => {
 	if (!commandfile) return;
 
 	// Delete the command message if needed
-	if (commandfile.help.delete)
-		setTimeout(() => {
-			message.delete();
-		}, settings.commandMessageDeleteAfter || 0);
+	// if (commandfile.help.delete)
+	// 	setTimeout(() => {
+	// 		message.delete();
+	// 	}, settings.commandMessageDeleteAfter || 100);
 
 	// Check permissions
 	const permNeeded = commandfile.help.authNeeded;
@@ -108,7 +108,7 @@ client.on("messageCreate", async (message) => {
 	// Checks if the command needs mention
 	if (commandfile.help.mention && !message.mentions.users.first())
 		return errorEmbed(
-			`Cette commande necessite une mension: \`${settings.prefix + commandfile.help.usage}\``,
+			`Cette commande necessite une mention: \`${settings.prefix + commandfile.help.usage}\``,
 			message
 		);
 

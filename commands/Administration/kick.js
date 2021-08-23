@@ -1,14 +1,14 @@
 const errorEmbed = require("../../utils/errorEmbed");
+const successEmbed = require("../../utils/successEmbed");
 
 module.exports.run = async (client, message, args) => {
-	// message.channel.send(`Kick ${message.mentions.users.first().tag} reason: ${args.splice(1).join(" ")}`);
-	// const reason = args.length > 1 ? args.splice(1).join(" ") : "";
-	// try {
-	// 	message.mentions.members.first().kick(reason);
-	// } catch {
-	// 	message.reply("I do not have permissions to kick " + message.members.mentions.first());
-	// }
-	errorEmbed("Hello, this is a test", message);
+	let member = message.mentions.members.first();
+
+	if (!member.kickable) return errorEmbed(`Je ne peux pas kicker ${message.mentions.users.first()} !`, message);
+
+	const reason = args.length > 1 ? args.splice(1).join(" ") : "";
+
+	member.kick(reason).then(successEmbed(`${message.mentions.users.first()} à bien été kické !`, message));
 };
 
 module.exports.help = {
