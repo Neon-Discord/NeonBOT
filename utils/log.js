@@ -1,15 +1,18 @@
 const { logs } = require("../config/settings.json");
 const fs = require("fs");
-
+// Import a package to read the last lines of log file
 const readLastLines = require("read-last-lines");
 
+// Logs init
 path = `./${logs.logsFile}`;
 if (!fs.existsSync(path)) fs.writeFileSync(path, "");
 
-module.exports.init = () => {
+// Init func (clear)
+module.exports.clear = () => {
 	fs.writeFileSync(path, "");
 };
 
+// Log func
 module.exports.log = (...args) => {
 	let date = new Date().toLocaleTimeString("fr-FR");
 	let txt = [];
@@ -25,6 +28,8 @@ module.exports.log = (...args) => {
 	txt = `${date} -> ${txt}\n`;
 	fs.appendFileSync(path, txt);
 };
+
+// To get the text
 module.exports.getLogs = async (nbLines) => {
 	return await readLastLines.read(path, nbLines);
 };

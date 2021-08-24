@@ -8,8 +8,9 @@ const fs = require("fs");
 
 // Utils
 const { errorMessage, infoMessage } = require("./utils/infoMessages");
-const { log, init } = require("./utils/log");
-init();
+const { log, clear } = require("./utils/log");
+clear();
+const Infobox = require("./utils/infobox");
 
 // Init the client
 const client = new Client({
@@ -25,35 +26,48 @@ client.commands = new Collection();
 client.commandsTree = [];
 
 // Read the commands folder and store all the commands found in the collection
-const innerBoxLen = 30;
-log(` ${"_".repeat(innerBoxLen)} `);
-log(`| Commands loaded :${" ".repeat(innerBoxLen - (1 + "Commands loaded :".length))}|`);
 const categories = fs.readdirSync("./commands/");
-categories.forEach((categ) => {
-	const files = fs.readdirSync(`./commands/${categ}/`);
 
-	let jsfiles = files.filter((f) => f.split(".").pop() === "js"); // Find all the js files in the folder ...
+// Init the infobox
+const infobox = new Infobox({
+	width: 30,
+	padding: 1,
+	paddingHeight: 0,
+});
+infobox.begin().add("Commands loaded :");
+
+// For each categories
+categories.forEach((categ) => {
+	// Read the files in the category
+	const files = fs.readdirSync(`./commands/${categ}/`);
+	// Find all the js files in the folder ...
+	let jsfiles = files.filter((f) => f.split(".").pop() === "js");
 	if (jsfiles.length <= 0) return;
 
-	log(`|    ${categ}${" ".repeat(innerBoxLen - (categ.length + 4))}|`);
+	// Add the category to the infobox
+	infobox.add(`  ${categ}`);
 
+	// For each commands in the category
 	let categoryCommands = [];
-	// And store them in the collection
-	jsfiles.forEach((f) => {
-		let commandLoaded = require(`./commands/${categ}/${f}`); // Load the command script
-		client.commands.set(commandLoaded.help.name, commandLoaded); // And save the command in the collection
+	jsfiles.forEach((file) => {
+		// Load the command script
+		let commandLoaded = require(`./commands/${categ}/${file}`);
+		// And save the command in the collection
+		client.commands.set(commandLoaded.help.name, commandLoaded);
 		categoryCommands.push(commandLoaded.help);
 		// Log to the console
-		log(`|     - ${f}${" ".repeat(innerBoxLen - (f.length + 7))}|`);
+		infobox.add(`  - ${file}`);
 	});
+
+	// Store the command in the commandsTree variable for the help command
 	client.commandsTree.push({
 		name: categ.toLowerCase(),
 		commands: categoryCommands,
 	});
 });
-log(`|${"_".repeat(innerBoxLen)}|`);
+infobox.finish(); // Close the infobox
 
-//Playing Message
+// Playing Message
 client.on("ready", async () => {
 	client.readyDate = Date.now(); // Set the readyDate for the uptime command
 	log(`${client.user.username} is online on ${client.guilds.cache.size} servers!`);
@@ -61,7 +75,7 @@ client.on("ready", async () => {
 	client.user.setActivity(`${settings.prefix}help`, { type: "PLAYING" });
 });
 
-//Add Role And Welcome New Member
+// Add Role And Welcome New Member
 client.on("guildMemberAdd", (member) => {
 	log("User" + member.user.tag + " has joined the server!");
 
