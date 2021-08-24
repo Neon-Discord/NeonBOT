@@ -8,7 +8,7 @@
 		"debug": "nodemon main.js"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "RONDEAU Felix (xil-f-dev)",
 	"license": "ISC",
 	"dependencies": {
 		"discord.js": "^13.1.0",

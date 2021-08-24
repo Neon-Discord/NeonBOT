@@ -7,27 +7,32 @@ module.exports = {
 	name: "messageCreate",
 	once: false,
 	execute(client, message) {
+		// Verify if the message is from normal account in the target server
 		if (message.author.bot) return;
 		if (message.channel.type === "dm") return;
+		if (!message.guild.id === settings.guildId) return;
 
-		if (!message.content.startsWith(settings.prefix)) return; // If the message is a command
+		// Checks if the message is a command
+		if (!message.content.startsWith(settings.prefix)) return;
+
+		// Split command and args
 		let command = message.content.substring(settings.prefix.length).split(" ");
 		const args = command.splice(1);
 		command = command[0];
 
-		log(command, args);
+		// TODO: Create a commands log file (bot_history)
 
 		// Verify if the command exists
 		let commandfile = client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command));
 		if (!commandfile) return;
 
-		// // Delete the command message if needed
-		// if (commandfile.help.delete) {
-		// 	var testmsg = message;
-		// 	setTimeout(() => {
-		// 		testmsg.delete();
-		// 	}, settings.commandMessageDeleteAfter || 0);
-		// }
+		// Delete the command message if needed
+		if (commandfile.help.delete) {
+			var testmsg = message;
+			setTimeout(() => {
+				testmsg.delete();
+			}, settings.commandMessageDeleteAfter || 0);
+		}
 
 		// Check permissions
 		const permNeeded = commandfile.help.authNeeded;
@@ -49,7 +54,7 @@ module.exports = {
 			);
 
 		// Check if the command has a cooldown pending
-		if (commandfile.help.locked === true)
+		if (commandfile.help.locked === true) {
 			return errorMessage(
 				`Cette commande est soumise à un cooldown de ${commandfile.help.cooldown} secondes, merci d'attendre ${
 					commandfile.help.cooldown -
@@ -57,10 +62,11 @@ module.exports = {
 				} secondes avant de pouvoir l'utiliser à nouveau`,
 				message.channel
 			);
-		else if (
+		} else if (
 			commandfile.help.locked_users &&
 			commandfile.help.locked_users.findIndex((cld) => cld.id == message.author.id) > -1
-		)
+		) {
+			// If the user has a cooldown pending
 			return errorMessage(
 				`Cette commande est soumise à un cooldown de ${
 					commandfile.help.cooldown
@@ -72,6 +78,7 @@ module.exports = {
 				} secondes avant de pouvoir l'utiliser à nouveau`,
 				message.channel
 			);
+		}
 
 		// Execute the command
 		commandfile.run(client, message, args);
