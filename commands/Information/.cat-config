@@ -1,0 +1,5 @@
+{
+    "name": "Information",
+    "help_command": "info",
+    "authorisation": ""
+}

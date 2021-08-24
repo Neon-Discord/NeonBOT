@@ -87,8 +87,11 @@ categories.forEach((categ) => {
 	});
 
 	// Store the command in the commandsTree variable for the help command
+	const config_file = JSON.parse(fs.readFileSync(`./commands/${categ}/.cat-config`));
 	client.commandsTree.push({
-		name: categ.toLowerCase(),
+		name: config_file.name,
+		cmd: config_file.help_command,
+		authorisation: config_file.authorisation,
 		commands: categoryCommands,
 	});
 });

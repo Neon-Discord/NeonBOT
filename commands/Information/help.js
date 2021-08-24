@@ -1,11 +1,11 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require("discord.js");
 const config = require("../../config/settings.json");
 
 module.exports.run = async (client, message, args) => {
 	if (args.length <= 0) listCategs(client, message);
-	else if (client.commandsTree.findIndex((categ) => categ.name == args[0].toLowerCase()) > -1)
+	else if (client.commandsTree.findIndex((categ) => categ.cmd == args[0].toLowerCase()) > -1)
 		listCommandsInCateg(
-			client.commandsTree.findIndex((categ) => categ.name == args[0].toLowerCase()),
+			client.commandsTree.findIndex((categ) => categ.cmd == args[0].toLowerCase()),
 			client,
 			message
 		);
@@ -16,9 +16,11 @@ module.exports.run = async (client, message, args) => {
 const listCategs = (client, message) => {
 	let fields = [];
 	client.commandsTree.forEach((category) => {
+		if (category.authorisation !== "" && !message.member.permissions.has(Permissions.FLAGS[category.authorisation]))
+			return;
 		fields.push({
-			name: capitalize(category.name),
-			value: `\`${config.prefix}help ${category.name}\``,
+			name: category.name,
+			value: `\`${config.prefix}help ${category.cmd}\``,
 			inline: true,
 		});
 	});
@@ -28,7 +30,10 @@ const listCategs = (client, message) => {
 		.setThumbnail(client.user.displayAvatarURL())
 		.addFields(fields);
 
-	message.channel.send({ embeds: [exampleEmbed] });
+	const row = new MessageActionRow().addComponents(
+		new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY")
+	);
+	message.channel.send({ embeds: [exampleEmbed], components: [row] });
 };
 
 const listCommandsInCateg = (index, client, message) => {
@@ -80,10 +85,6 @@ const showCommandHelp = (cmd, client, message) => {
 
 	message.channel.send({ embeds: [exampleEmbed] });
 };
-
-function capitalize(word) {
-	return word[0].toUpperCase() + word.substring(1).toLowerCase();
-}
 
 module.exports.help = {
 	name: "help",

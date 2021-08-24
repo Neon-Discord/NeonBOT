@@ -1,0 +1,5 @@
+{
+    "name": "Modération",
+    "help_command": "modo",
+    "authorisation": "MANAGE_MESSAGES"
+}
