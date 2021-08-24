@@ -28,9 +28,9 @@ module.exports = {
 
 		// Delete the command message if needed
 		if (commandfile.help.delete) {
-			var testmsg = message;
+			var msgcopy = message;
 			setTimeout(() => {
-				testmsg.delete();
+				if (!msgcopy.deleted) msgcopy.delete();
 			}, settings.commandMessageDeleteAfter || 0);
 		}
 

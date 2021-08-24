@@ -8,7 +8,7 @@ module.exports.errorMessage = async (text, channel) => {
 		})
 		.then((sentMessage) =>
 			setTimeout(() => {
-				sentMessage.delete();
+				if (sentMessage.deleted) sentMessage.delete();
 			}, errorMessagesDeleteAfter)
 		);
 };
@@ -18,9 +18,15 @@ module.exports.errorMessagePersistent = async (text, channel) => {
 	});
 };
 module.exports.successMessage = async (text, channel) => {
-	return channel.send({
-		embeds: [new MessageEmbed().setColor("#41f04f").setDescription(text)],
-	});
+	return channel
+		.send({
+			embeds: [new MessageEmbed().setColor("#41f04f").setDescription(text)],
+		})
+		.then((sentMessage) =>
+			setTimeout(() => {
+				if (!sentMessage.deleted) sentMessage.delete();
+			}, errorMessagesDeleteAfter)
+		);
 };
 module.exports.infoMessage = async (text, channel) => {
 	return channel.send({
