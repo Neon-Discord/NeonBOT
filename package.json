@@ -5,12 +5,13 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "node main.js",
-    "debug": "nodemon main.js"
+		"debug": "nodemon main.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"discord.js": "^13.1.0"
+		"discord.js": "^13.1.0",
+		"read-last-lines": "^1.8.0"
 	}
 }

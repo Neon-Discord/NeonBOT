@@ -1,14 +1,14 @@
-const errorEmbed = require("../../utils/errorEmbed");
-const successEmbed = require("../../utils/successEmbed");
+const { errorMessage, successMessage } = require("../../utils/infoMessages");
 
 module.exports.run = async (client, message, args) => {
 	let member = message.mentions.members.first();
 
-	if (!member.kickable) return errorEmbed(`Je ne peux pas kicker ${message.mentions.users.first()} !`, message);
+	if (!member.kickable)
+		return errorMessage(`Je ne peux pas kicker ${message.mentions.users.first()} !`, message.channel);
 
 	const reason = args.length > 1 ? args.splice(1).join(" ") : "";
 
-	member.kick(reason).then(successEmbed(`${message.mentions.users.first()} à bien été kické !`, message));
+	member.kick(reason).then(successMessage(`${message.mentions.users.first()} à bien été kické !`, message.channel));
 };
 
 module.exports.help = {

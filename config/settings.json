@@ -1,12 +1,17 @@
 {
-	"prefix": ".",
+	"prefix": "$",
 	"welcome": {
-		"welcomeChannel": 876214825833873419,
+		"welcomeChannel": 879618448735498291,
 		"welcomeRole": 876213742721974302
 	},
 	"help": {
 		"embedColor": "#6e246a"
 	},
+	"logs": {
+		"logsChannel": 879618448735498291,
+		"logsFile": "process.log"
+	},
 	"errorMessagesDeleteAfter": 10000,
-	"commandMessageDeleteAfter": 100
+	"commandMessageDeleteAfter": 0,
+	"guildId": 876210790250741830
 }

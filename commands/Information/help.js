@@ -90,7 +90,7 @@ module.exports.help = {
 	aliases: ["h", "?"],
 	description: "Show commands",
 	usage: "help [command || category]",
-	cooldown: "10", // sec
+	cooldown: "2", // sec
 	cooldownType: "user", // 'user' || 'command'
 	authNeeded: "", // eg. KICK_MEMBERS
 	delete: true,
