@@ -9,7 +9,8 @@
 	},
 	"logs": {
 		"logsChannel": 879618448735498291,
-		"logsFile": "process.log"
+		"logsFile": "process.log",
+		"cmdHistory": "commands.log"
 	},
 	"errorMessagesDeleteAfter": 10000,
 	"commandMessageDeleteAfter": 0,
