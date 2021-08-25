@@ -7,7 +7,7 @@ module.exports.help = {
 	name: "uptime",
 	aliases: ["up", "upt"],
 	description: "Show bot's uptime",
-	usage: "uptime", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command>", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "0", // sec
 	cooldownType: "", // 'user' || 'command'
 	authNeeded: "", // eg. KICK_MEMBERS

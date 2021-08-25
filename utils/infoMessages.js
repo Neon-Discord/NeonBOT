@@ -8,7 +8,7 @@ module.exports.errorMessage = async (text, channel) => {
 		})
 		.then((sentMessage) =>
 			setTimeout(() => {
-				if (sentMessage.deleted) sentMessage.delete();
+				if (!sentMessage.deleted) sentMessage.delete();
 			}, errorMessagesDeleteAfter)
 		);
 };

@@ -16,9 +16,8 @@ module.exports = {
 		if (!message.content.startsWith(settings.prefix)) return;
 
 		// Split command and args
-		let command = message.content.substring(settings.prefix.length).split(" ");
-		const args = command.splice(1);
-		command = command[0];
+		const args = message.content.slice(settings.prefix.length).trim().split(/ +/);
+		const command = args.shift().toLowerCase();
 
 		// TODO: Create a commands log file (bot_history)
 
@@ -42,14 +41,18 @@ module.exports = {
 		// Checks if the commands needs args
 		if (commandfile.help.args && args.length < 1)
 			return errorMessage(
-				`Cette commande necessite des arguments: \`${settings.prefix + commandfile.help.usage}\``,
+				`Cette commande necessite des arguments: \`${
+					settings.prefix + commandfile.help.usage.replace("<command>", command)
+				}\``,
 				message.channel
 			);
 
 		// Checks if the command needs mention
-		if (commandfile.help.mention && !message.mentions.users.first())
+		if (commandfile.help.mention && !(message.mentions.users.first() || message.mentions.channels.first()))
 			return errorMessage(
-				`Cette commande necessite une mention: \`${settings.prefix + commandfile.help.usage}\``,
+				`Cette commande necessite une mention: \`${
+					settings.prefix + commandfile.help.usage.replace("<command>", command)
+				}\``,
 				message.channel
 			);
 

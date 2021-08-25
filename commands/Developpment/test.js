@@ -34,7 +34,7 @@ module.exports.help = {
 	name: "test",
 	aliases: [],
 	description: "Just a test",
-	usage: "test", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command>", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "10", // sec
 	cooldownType: "command", // 'user' || 'command'
 	authNeeded: "ADMINISTRATOR", // eg. KICK_MEMBERS

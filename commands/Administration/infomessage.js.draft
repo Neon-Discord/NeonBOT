@@ -1,0 +1,33 @@
+const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { errorMessage } = require("../../utils/infoMessages");
+
+module.exports.run = async (client, message, args) => {
+	const targetChannel = message.mentions.channels.first();
+	if (targetChannel.deleted || !targetChannel.isText())
+		return errorMessage("Le salon doit être du type text et ne doit pas être supprimé !", message.channel);
+
+	const confirmationEmbed = new MessageEmbed()
+		.setColor("#f3f2f5")
+		.setAuthor("Confirmation", client.user.displayAvatarURL())
+		.setDescription(`**Voulez-vous vraiment creer un infomessage dans le salon ${targetChannel}**`);
+
+	const buttons = new MessageActionRow().addComponents([
+		new MessageButton().setCustomId("infomsg_continue").setLabel("Oui, continuer !").setStyle("PRIMARY"),
+		new MessageButton().setCustomId("infomsg_cancel").setLabel("Non, je veux annuler").setStyle("DANGER"),
+	]);
+
+	message.channel.send({ embeds: [confirmationEmbed], components: [buttons] });
+};
+
+module.exports.help = {
+	name: "infomessage",
+	aliases: ["infomsg"],
+	description: "Create, refresh or delete the infomessage",
+	usage: "<command> #channel", // '[]' for not necessary args and '||' for OR symbol
+	cooldown: "0", // sec
+	cooldownType: "", // 'user' || 'command'
+	authNeeded: "ADMINISTRATOR", // eg. KICK_MEMBERS
+	delete: true,
+	mention: true,
+	args: false,
+};

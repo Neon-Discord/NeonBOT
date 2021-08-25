@@ -1,6 +1,10 @@
 const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require("discord.js");
 const config = require("../../config/settings.json");
 
+const msgCloseButton = new MessageActionRow().addComponents(
+	new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY")
+);
+
 module.exports.run = async (client, message, args) => {
 	if (args.length <= 0) listCategs(client, message);
 	else if (client.commandsTree.findIndex((categ) => categ.cmd == args[0].toLowerCase()) > -1)
@@ -9,8 +13,12 @@ module.exports.run = async (client, message, args) => {
 			client,
 			message
 		);
-	else if (client.commands.get(args[0].toLowerCase()))
-		showCommandHelp(client.commands.get(args[0].toLowerCase()).help, client, message);
+	else if (client.commands.find((cmd) => cmd.help.name == args[0] || cmd.help.aliases.includes(args[0])))
+		showCommandHelp(
+			client.commands.find((cmd) => cmd.help.name == args[0] || cmd.help.aliases.includes(args[0])).help,
+			client,
+			message
+		);
 };
 
 const listCategs = (client, message) => {
@@ -29,11 +37,7 @@ const listCategs = (client, message) => {
 		.setAuthor("Neon BOT commands", client.user.displayAvatarURL())
 		.setThumbnail(client.user.displayAvatarURL())
 		.addFields(fields);
-
-	const row = new MessageActionRow().addComponents(
-		new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY")
-	);
-	message.channel.send({ embeds: [exampleEmbed], components: [row] });
+	message.channel.send({ embeds: [exampleEmbed], components: [msgCloseButton] });
 };
 
 const listCommandsInCateg = (index, client, message) => {
@@ -52,7 +56,7 @@ const listCommandsInCateg = (index, client, message) => {
 		.setThumbnail(client.user.displayAvatarURL())
 		.addFields(fields);
 
-	message.channel.send({ embeds: [exampleEmbed] });
+	message.channel.send({ embeds: [exampleEmbed], components: [msgCloseButton] });
 };
 
 const showCommandHelp = (cmd, client, message) => {
@@ -63,7 +67,7 @@ const showCommandHelp = (cmd, client, message) => {
 		.addFields([
 			{
 				name: "Usage :",
-				value: config.prefix + cmd.usage,
+				value: `\`${config.prefix + cmd.usage.replace("<command>", cmd.name)}\``,
 			},
 			{
 				name: "Description :",
@@ -83,14 +87,14 @@ const showCommandHelp = (cmd, client, message) => {
 			},
 		]);
 
-	message.channel.send({ embeds: [exampleEmbed] });
+	message.channel.send({ embeds: [exampleEmbed], components: [msgCloseButton] });
 };
 
 module.exports.help = {
 	name: "help",
 	aliases: ["h", "?"],
 	description: "Show commands",
-	usage: "help [command || category]",
+	usage: "<command> [command || category]",
 	cooldown: "2", // sec
 	cooldownType: "user", // 'user' || 'command'
 	authNeeded: "", // eg. KICK_MEMBERS

@@ -15,7 +15,7 @@ module.exports.help = {
 	name: "kick",
 	aliases: [],
 	description: "Kick the member",
-	usage: "kick @member [reason]", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command> @member [reason]", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "10", // sec
 	cooldownType: "command", // 'user' || 'command'
 	authNeeded: "KICK_MEMBERS", // eg. KICK_MEMBERS

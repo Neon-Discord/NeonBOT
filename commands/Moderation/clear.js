@@ -12,7 +12,7 @@ module.exports.help = {
 	name: "clear",
 	aliases: [],
 	description: "Just a test",
-	usage: "clear [number of messages]", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command> [number of messages]", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "2", // sec
 	cooldownType: "user", // 'user' || 'command'
 	authNeeded: "MANAGE_MESSAGES", // eg. KICK_MEMBERS
