@@ -1,0 +1,5 @@
+{
+    "name": "Misc",
+    "help_command": "misc",
+    "authorisation": "ADMINISTRATOR"
+}
