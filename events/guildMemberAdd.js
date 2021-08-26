@@ -6,7 +6,7 @@ module.exports = {
 	name: "guildMemberAdd",
 	once: false,
 	execute(client, member) {
-		log("User " + member.user.tag + " has joined the server!");
+		log("User " + member.user.tag + " has joined the server !");
 
 		var role = member.guild.roles.cache.find((role) => role.id == welcome.welcomeRole);
 

@@ -44,7 +44,7 @@ const listCommandsInCateg = (index, client, message) => {
 	let fields = [];
 	client.commandsTree[index].commands.forEach((cmd) => {
 		fields.push({
-			name: `\`${config.prefix + cmd.usage}\``,
+			name: `\`${config.prefix + cmd.usage.replace("<command>", cmd.name)}\``,
 			value: cmd.description,
 			inline: false,
 		});
