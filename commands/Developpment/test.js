@@ -1,33 +1,37 @@
 const { MessageActionRow, MessageButton } = require("discord.js");
+const { createEventMessage } = require("../../utils/eventMessages");
 
 module.exports.run = async (client, message, args) => {
-	const rows = [];
-	rows.push(
-		new MessageActionRow().addComponents(
-			new MessageButton().setCustomId("primary").setLabel("J'ai compris !").setStyle("PRIMARY")
-		)
-	);
-	rows.push(
-		new MessageActionRow().addComponents(
-			new MessageButton().setCustomId("sec").setLabel("J'ai compris !").setStyle("SECONDARY")
-		)
-	);
-	rows.push(
-		new MessageActionRow().addComponents(
-			new MessageButton().setCustomId("suc").setLabel("J'ai compris !").setStyle("SUCCESS")
-		)
-	);
-	rows.push(
-		new MessageActionRow().addComponents(
-			new MessageButton().setCustomId("dng").setLabel("J'ai compris !").setStyle("DANGER")
-		)
-	);
-	rows.push(
-		new MessageActionRow().addComponents(
-			new MessageButton().setLabel("J'ai compris !").setStyle("LINK").setURL("http://google.fr")
-		)
-	);
-	message.channel.send({ content: "It works !", components: rows });
+	createEventMessage({
+		text: "Bonjour",
+	});
+	// const rows = [];
+	// rows.push(
+	// 	new MessageActionRow().addComponents(
+	// 		new MessageButton().setCustomId("primary").setLabel("J'ai compris !").setStyle("PRIMARY")
+	// 	)
+	// );
+	// rows.push(
+	// 	new MessageActionRow().addComponents(
+	// 		new MessageButton().setCustomId("sec").setLabel("J'ai compris !").setStyle("SECONDARY")
+	// 	)
+	// );
+	// rows.push(
+	// 	new MessageActionRow().addComponents(
+	// 		new MessageButton().setCustomId("suc").setLabel("J'ai compris !").setStyle("SUCCESS")
+	// 	)
+	// );
+	// rows.push(
+	// 	new MessageActionRow().addComponents(
+	// 		new MessageButton().setCustomId("dng").setLabel("J'ai compris !").setStyle("DANGER")
+	// 	)
+	// );
+	// rows.push(
+	// 	new MessageActionRow().addComponents(
+	// 		new MessageButton().setLabel("J'ai compris !").setStyle("LINK").setURL("http://google.fr")
+	// 	)
+	// );
+	// message.channel.send({ content: "It works !", components: rows });
 };
 
 module.exports.help = {

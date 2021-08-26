@@ -21,6 +21,7 @@ const client = new Client({
 		),
 });
 
+module.exports.client = client;
 //
 //
 //
