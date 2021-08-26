@@ -8,6 +8,8 @@ const fs = require("fs");
 // Utils
 const { clear } = require("./utils/log");
 clear();
+const { clearHistory } = require("./utils/cmdHistory");
+clearHistory();
 const Infobox = require("./utils/infobox");
 
 // Init the client
@@ -80,7 +82,7 @@ categories.forEach((categ) => {
 		// Load the command script
 		let commandLoaded = require(`./commands/${categ}/${file}`);
 		// And save the command in the collection
-		client.commands.set(commandLoaded.help.name, commandLoaded);
+		client.commands.set(commandLoaded.help.name.toLowerCase(), commandLoaded);
 		categoryCommands.push(commandLoaded.help);
 		// Log to the console
 		cmdBox.add(`  - ${file}`);

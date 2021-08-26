@@ -1,31 +1,27 @@
-const settings = require("../config/settings.json");
+const { logs } = require("../config/settings.json");
 const fs = require("fs");
 // Import a package to read the last lines of log file
 const readLastLines = require("read-last-lines");
 
 // Logs init
-path = `./${settings.logs.cmdHistory}`;
-if (!fs.existsSync(path)) fs.writeFileSync(path, "");
+cmdHistoryPath = `./${logs.cmdHistory}`;
+if (!fs.existsSync(cmdHistoryPath)) fs.writeFileSync(cmdHistoryPath, "");
 
 // Init func (clear)
-module.exports.clear = () => {
-	fs.writeFileSync(path, "");
+module.exports.clearHistory = () => {
+	fs.writeFileSync(cmdHistoryPath, "");
 };
 
 // Log func
-module.exports.cmdLog = (message) => {
-	let date = new Date().toLocaleTimeString("fr-FR");
+module.exports.cmdLog = (author, command, args) => {
+	let time = new Date().toLocaleTimeString("fr-FR");
+	let line = `${author} used ${command} : ${JSON.stringify(args)}`;
 
-	const args = message.content.slice(settings.prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	let txt = `${message.author} used ${command} with args ${JSON.stringify(args)}`;
-
-	txt = `${date} -> ${txt}\n`;
-	fs.appendFileSync(path, txt);
+	line = `${time} -> ${line}\n`;
+	fs.appendFileSync(cmdHistoryPath, line);
 };
 
 // To get the text
-module.exports.getLogs = async (nbLines) => {
-	return await readLastLines.read(path, nbLines);
+module.exports.getCmdHistory = async (nbLines) => {
+	return await readLastLines.read(cmdHistoryPath, nbLines);
 };

@@ -1,6 +1,6 @@
 const settings = require("../config/settings.json");
 const { Permissions } = require("discord.js");
-const { log } = require("../utils/log");
+const { cmdLog } = require("../utils/cmdHistory");
 const { errorMessage } = require("../utils/infoMessages");
 
 module.exports = {
@@ -19,11 +19,12 @@ module.exports = {
 		const args = message.content.slice(settings.prefix.length).trim().split(/ +/);
 		const command = args.shift().toLowerCase();
 
-		// TODO: Create a commands log file (bot_history)
-
 		// Verify if the command exists
 		let commandfile = client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command));
 		if (!commandfile) return;
+
+		// Logs the command the the cmdHistory log file
+		cmdLog(message.author.tag, command, args);
 
 		// Delete the command message if needed
 		if (commandfile.help.delete) {
