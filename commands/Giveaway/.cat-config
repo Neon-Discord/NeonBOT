@@ -1,0 +1,5 @@
+{
+    "name": "Giveaway",
+    "help_command": "giveaway",
+    "authorisation": "ADMINISTRATOR"
+}

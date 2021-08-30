@@ -55,6 +55,7 @@ eventsBox.finish();
 // Create the commands Discord collection
 client.commands = new Collection();
 client.commandsTree = [];
+client.responding_list = new Collection();
 
 // Read the commands folder and store all the commands found in the collection
 const categories = fs.readdirSync("./commands/");

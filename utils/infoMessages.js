@@ -33,7 +33,11 @@ module.exports.infoMessage = async (text, channel) => {
 		embeds: [new MessageEmbed().setColor("#2d57ba").setDescription(text)],
 	});
 };
-
+module.exports.promptMessage = async (text, channel) => {
+	return channel.send({
+		embeds: [new MessageEmbed().setColor("#FFC000").setDescription(text)],
+	});
+};
 module.exports.logMessage = async (text, channel) => {
 	return channel.send({
 		embeds: [new MessageEmbed().setColor("#43464a").setDescription(text)],

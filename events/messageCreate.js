@@ -6,11 +6,19 @@ const { errorMessage } = require("../utils/infoMessages");
 module.exports = {
 	name: "messageCreate",
 	once: false,
-	execute(client, message) {
+	execute: async (client, message) => {
 		// Verify if the message is from normal account in the target server
 		if (message.author.bot) return;
 		if (message.channel.type === "dm") return;
 		if (!message.guild.id === settings.guildId) return;
+
+		// Checks if the message is not in the responding_value array
+		if (client.responding_list.has(`${message.channel.id}||${message.author.id}`)) {
+			client.responding_list
+				.get(`${message.channel.id}||${message.author.id}`)
+				.responding(client, message, message.content);
+			return client.responding_list.delete(`${message.channel.id}||${message.author.id}`);
+		}
 
 		// Checks if the message is a command
 		if (!message.content.startsWith(settings.prefix)) return;
@@ -85,7 +93,13 @@ module.exports = {
 		}
 
 		// Execute the command
-		commandfile.run(client, message, args);
+		const after_run_config = await commandfile.run(client, message, args);
+
+		// If the command need a response
+		if (after_run_config && after_run_config.wait_for_response) {
+			if (client.responding_list.has(`${message.channel.id}||${message.author.id}`)) return;
+			client.responding_list.set(`${message.channel.id}||${message.author.id}`, commandfile);
+		}
 
 		// Cooldown
 		if (!commandfile.help.cooldown > 0) return;

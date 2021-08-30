@@ -5,7 +5,7 @@ const { createEventMessage } = require("../utils/eventMessages");
 module.exports = {
 	name: "guildMemberRemove",
 	once: false,
-	execute(client, member) {
+	execute: async (client, member) => {
 		log("User " + member.user.tag + " left the server !");
 
 		createEventMessage({
