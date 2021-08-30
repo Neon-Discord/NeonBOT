@@ -30,7 +30,6 @@ module.exports.run = async (client, message, args) => {
 		return this.sendJoke(catJoke, message.channel);
 	}
 	const randomJoke = await blagues.random();
-	console.log(randomJoke);
 	return this.sendJoke(randomJoke, message.channel);
 };
 
