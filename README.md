@@ -19,7 +19,7 @@ A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 4. Copy the config
 
     > ````bash
-    > cp config/config.example.json config/>config.json```
+    > cp config/config.example.json config/config.json```
     > ````
 
     and put your Discord application token and if you want the Blagues_api token
