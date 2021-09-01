@@ -18,18 +18,18 @@ A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 
 4. Copy the config
 
-    > ````bash
-    > cp config/config.example.json config/config.json```
-    > ````
+    > ```bash
+    > cp config/config.example.json config/config.json
+    > ```
 
     and put your Discord application token and if you want the Blagues_api token
 
 5. Run the bot :
-    > ````bash
+    > ```bash
     > npm start
     > # Or with pm2
-    > pm2 start main.js --name NeonBOT```
-    > ````
+    > pm2 start main.js --name NeonBOT
+    > ```
 
 #### NOTE:
 
