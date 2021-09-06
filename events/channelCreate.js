@@ -11,7 +11,7 @@ module.exports = {
 		createEventMessage({
 			text: `**New channel created: ${channel} !**`,
 			color: "#3f92bf",
-			footer: `${channel.type.replace("GUILD_", "")} channel`,
+			footer: `${channel.type.replace("GUILD_", "").toLowerCase()} channel`,
 		});
 	},
 };

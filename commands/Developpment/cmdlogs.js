@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
 	let nbLines = 10;
 	if (args.length > 0) nbLines = parseInt(args[0]);
 	const logs = await getCmdHistory(nbLines);
-	logMessage("```" + logs + "```", message.channel);
+	logMessage("```" + logs.substring(0, 4095 - 6) + "```", message.channel);
 };
 
 module.exports.help = {

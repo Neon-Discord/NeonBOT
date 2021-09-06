@@ -14,10 +14,12 @@ module.exports = {
 
 		// Checks if the message is not in the responding_value array
 		if (client.responding_list.has(`${message.channel.id}||${message.author.id}`)) {
-			client.responding_list
+			const after_run_config = await client.responding_list
 				.get(`${message.channel.id}||${message.author.id}`)
 				.responding(client, message, message.content);
-			return client.responding_list.delete(`${message.channel.id}||${message.author.id}`);
+
+			if (!after_run_config || !after_run_config.wait_for_response)
+				return client.responding_list.delete(`${message.channel.id}||${message.author.id}`);
 		}
 
 		// Checks if the message is a command

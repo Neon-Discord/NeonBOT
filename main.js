@@ -1,5 +1,6 @@
 // Config
 const config = require("./config/config.json");
+const { logs } = require("./config/settings.json");
 
 // Require
 const { Client, Collection } = require("discord.js");
@@ -7,7 +8,7 @@ const fs = require("fs");
 
 // Utils
 const { clear } = require("./utils/log");
-clear();
+if (logs.logsDeleteWhenStart) clear();
 const { clearHistory } = require("./utils/cmdHistory");
 clearHistory();
 const Infobox = require("./utils/infobox");

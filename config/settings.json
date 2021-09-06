@@ -10,7 +10,12 @@
 	"logs": {
 		"logsChannel": 879618448735498291,
 		"logsFile": "process.log",
-		"cmdHistory": "commands.log"
+		"cmdHistory": "commands.log",
+		"logsDeleteWhenStart" : true
+	},
+	"giveaways": {
+		"channelId": 884494866841731084,
+		"embedColor": "#159753"
 	},
 	"errorMessagesDeleteAfter": 10000,
 	"commandMessageDeleteAfter": 0,
