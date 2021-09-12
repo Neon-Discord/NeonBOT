@@ -2,7 +2,8 @@
 
 A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 
-![Discord](https://img.shields.io/discord/876210790250741830?label=DISCORD&style=for-the-badge)
+[![Discord](https://img.shields.io/badge/DISCORD-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white)
+](https://discord.gg/2dvRqgKd) ![Discord](https://img.shields.io/discord/876210790250741830?label=DISCORD&style=for-the-badge)
 
 ## Installation
 
