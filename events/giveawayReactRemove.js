@@ -6,7 +6,7 @@ module.exports = {
 	once: false,
 	execute: async (client, reaction, user) => {
 		if (user.bot) return;
-		const giveaway = db.getData("/giveaways").find((giveaway) => giveaway.id == reaction.message.id);
+		const giveaway = db.getData("/giveaways").find((giveaway) => giveaway.msg_id == reaction.message.id);
 		if (!giveaway) return;
 		log(`User ${user.username} leave giveaway ${giveaway.id} !`);
 		db.delete(

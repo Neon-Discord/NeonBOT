@@ -15,7 +15,9 @@
 	},
 	"giveaways": {
 		"channelId": 884494866841731084,
-		"embedColor": "#159753"
+		"embedColor": "#159753",
+		"embedWinColor": "#E34B00",
+		"embedListColor": "#DC8000"
 	},
 	"errorMessagesDeleteAfter": 10000,
 	"commandMessageDeleteAfter": 0,
