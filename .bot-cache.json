@@ -1,3 +1,12 @@
 {
-    "giveaways": []
+    "giveaways": [
+        {
+            "id": 111,
+            "msg_id": "886716732213972995",
+            "gift": "Un test",
+            "participants": [
+                "719547214719877121"
+            ]
+        }
+    ]
 }

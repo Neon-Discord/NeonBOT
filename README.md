@@ -9,15 +9,21 @@ A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 
 1. Clone this repository :
 
-    > `git clone https://github.com/Neon-Discord/NeonBOT.git`
+    > ```bash
+    > git clone https://github.com/Neon-Discord/NeonBOT.git
+    > ```
 
-2. `cd` to the downloaded folder :
+2. Open the downloaded folder :
 
-    > `cd NeonBOT`
+    > ```bash
+    > cd NeonBOT
+    > ```
 
 3. Install the dependencies :
 
-    > `npm install`
+    > ```bash
+    > npm install
+    > ```
 
 4. Copy the config
 
@@ -36,7 +42,7 @@ A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 
 #### NOTE:
 
-You can change the bot prefix, the announcements and welcome channels id in the `config/setting.json` file.
+You can change the bot prefix, the announcements and welcome channels IDs in the `config/setting.json` file.
 
 ## Contributors
 
