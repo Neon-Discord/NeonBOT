@@ -2,6 +2,8 @@
 
 A bot for the [Neon Discord server](https://discord.gg/qU7RkH8XNF).
 
+![Discord](https://img.shields.io/discord/876210790250741830?label=DISCORD&style=for-the-badge)
+
 ## Installation
 
 1. Clone this repository :
