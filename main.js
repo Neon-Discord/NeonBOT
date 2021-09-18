@@ -79,11 +79,16 @@ categories.forEach((categ) => {
 	// Add the category to the infobox
 	cmdBox.add(`  ${categ}`);
 
+	// Read category config file
+	const config_file = JSON.parse(fs.readFileSync(`./commands/${categ}/.cat-config`));
+
 	// For each commands in the category
 	let categoryCommands = [];
 	jsfiles.forEach((file) => {
 		// Load the command script
 		let commandLoaded = require(`./commands/${categ}/${file}`);
+		// Create the categ property to manage permissions in ./events/messageCreate.js
+		commandLoaded.help.categ = config_file.name;
 		// And save the command in the collection
 		client.commands.set(commandLoaded.help.name.toLowerCase(), commandLoaded);
 		categoryCommands.push(commandLoaded.help);
@@ -92,7 +97,6 @@ categories.forEach((categ) => {
 	});
 
 	// Store the command in the commandsTree variable for the help command
-	const config_file = JSON.parse(fs.readFileSync(`./commands/${categ}/.cat-config`));
 	client.commandsTree.push({
 		name: config_file.name,
 		cmd: config_file.help_command,

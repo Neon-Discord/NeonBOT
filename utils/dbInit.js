@@ -6,4 +6,10 @@ const { Config } = require("node-json-db/dist/lib/JsonDBConfig");
 // If you put false, you'll have to call the save() method.
 // The third argument is to ask JsonDB to save the database in an human readable format. (default false)
 // The last argument is the separator. By default it's slash (/)
-module.exports.db = new JsonDB(new Config(".bot-cache", true, true, "/"));
+const db = new JsonDB(new Config(".bot-cache", true, true, "/"));
+
+if (!db.getData("/").giveaways) {
+	db.push("/giveaways", []);
+}
+
+module.exports.db = db;

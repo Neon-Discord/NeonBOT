@@ -32,7 +32,7 @@ module.exports = {
 		// Verify if the command exists
 		let commandfile = client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command));
 		if (!commandfile) return;
-
+		let commandCateg = client.commandsTree.find((cat) => cat.name == commandfile.help.categ); // commandfile.help.categ automaticly created by command handler in ../main.js
 		// Logs the command the the cmdHistory log file
 		cmdLog(message.author.tag, command, args);
 
@@ -45,25 +45,21 @@ module.exports = {
 		}
 
 		// Check permissions
-		const permNeeded = commandfile.help.authNeeded;
+		const permNeeded = commandCateg.authorisation;
 		if (permNeeded != "" && !message.member.permissions.has(Permissions.FLAGS[permNeeded]))
 			return errorMessage(`Vous devez avoir la permission ${permNeeded} pour effectuer cette action !`, message);
 
 		// Checks if the commands needs args
 		if (commandfile.help.args && args.length < 1)
 			return errorMessage(
-				`Cette commande necessite des arguments: \`${
-					settings.prefix + commandfile.help.usage.replace("<command>", command)
-				}\``,
+				`Cette commande necessite des arguments: \`${settings.prefix + commandfile.help.usage.replace("<command>", command)}\``,
 				message.channel
 			);
 
 		// Checks if the command needs mention
 		if (commandfile.help.mention && !(message.mentions.users.first() || message.mentions.channels.first()))
 			return errorMessage(
-				`Cette commande necessite une mention: \`${
-					settings.prefix + commandfile.help.usage.replace("<command>", command)
-				}\``,
+				`Cette commande necessite une mention: \`${settings.prefix + commandfile.help.usage.replace("<command>", command)}\``,
 				message.channel
 			);
 
@@ -71,24 +67,16 @@ module.exports = {
 		if (commandfile.help.locked === true) {
 			return errorMessage(
 				`Cette commande est soumise à un cooldown de ${commandfile.help.cooldown} secondes, merci d'attendre ${
-					commandfile.help.cooldown -
-					new Date(Date.now() - commandfile.help.cmd_cooldown_start_date).getSeconds()
+					commandfile.help.cooldown - new Date(Date.now() - commandfile.help.cmd_cooldown_start_date).getSeconds()
 				} secondes avant de pouvoir l'utiliser à nouveau`,
 				message.channel
 			);
-		} else if (
-			commandfile.help.locked_users &&
-			commandfile.help.locked_users.findIndex((cld) => cld.id == message.author.id) > -1
-		) {
+		} else if (commandfile.help.locked_users && commandfile.help.locked_users.findIndex((cld) => cld.id == message.author.id) > -1) {
 			// If the user has a cooldown pending
 			return errorMessage(
-				`Cette commande est soumise à un cooldown de ${
-					commandfile.help.cooldown
-				} secondes par utilisateur, merci d'attendre ${
+				`Cette commande est soumise à un cooldown de ${commandfile.help.cooldown} secondes par utilisateur, merci d'attendre ${
 					commandfile.help.cooldown -
-					new Date(
-						Date.now() - commandfile.help.locked_users.find((cld) => cld.id == message.author.id).start_time
-					).getSeconds()
+					new Date(Date.now() - commandfile.help.locked_users.find((cld) => cld.id == message.author.id).start_time).getSeconds()
 				} secondes avant de pouvoir l'utiliser à nouveau`,
 				message.channel
 			);
@@ -108,25 +96,14 @@ module.exports = {
 		if (commandfile.help.cooldownType == "command") {
 			let currentDate = Date.now();
 
-			client.commands.find(
-				(cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)
-			).help.locked = true;
-			client.commands.find(
-				(cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)
-			).help.cmd_cooldown_start_date = currentDate;
+			client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help.locked = true;
+			client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help.cmd_cooldown_start_date = currentDate;
 			setInterval(() => {
-				client.commands.find(
-					(cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)
-				).help.locked = false;
+				client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help.locked = false;
 			}, commandfile.help.cooldown * 1000);
 		} else if (commandfile.help.cooldownType == "user") {
-			if (
-				!client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help
-					.locked_users
-			) {
-				client.commands.find(
-					(cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)
-				).help.locked_users = [];
+			if (!client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help.locked_users) {
+				client.commands.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command)).help.locked_users = [];
 			}
 			client.commands
 				.find((cmd) => cmd.help.name == command || cmd.help.aliases.includes(command))

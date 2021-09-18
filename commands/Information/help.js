@@ -1,9 +1,8 @@
 const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require("discord.js");
 const config = require("../../config/settings.json");
+const { errorMessage } = require("../../utils/infoMessages");
 
-const msgCloseButton = new MessageActionRow().addComponents(
-	new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY")
-);
+const msgCloseButton = new MessageActionRow().addComponents(new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY"));
 
 module.exports.run = async (client, message, args) => {
 	if (args.length <= 0) listCategs(client, message);
@@ -14,18 +13,18 @@ module.exports.run = async (client, message, args) => {
 			message
 		);
 	else if (client.commands.find((cmd) => cmd.help.name == args[0] || cmd.help.aliases.includes(args[0])))
-		showCommandHelp(
-			client.commands.find((cmd) => cmd.help.name == args[0] || cmd.help.aliases.includes(args[0])).help,
-			client,
-			message
-		);
+		showCommandHelp(client.commands.find((cmd) => cmd.help.name == args[0] || cmd.help.aliases.includes(args[0])).help, client, message);
+};
+
+const authorizedCateg = (ctgName, mbr, client) => {
+	const category = client.commandsTree.find((ctg) => ctg.name === ctgName);
+	if (category.authorisation !== "" && !mbr.permissions.has(Permissions.FLAGS[category.authorisation])) return false;
 };
 
 const listCategs = (client, message) => {
 	let fields = [];
 	client.commandsTree.forEach((category) => {
-		if (category.authorisation !== "" && !message.member.permissions.has(Permissions.FLAGS[category.authorisation]))
-			return;
+		if (category.authorisation !== "" && !message.member.permissions.has(Permissions.FLAGS[category.authorisation])) return;
 		fields.push({
 			name: category.name,
 			value: `\`${config.prefix}help ${category.cmd}\``,
@@ -41,6 +40,8 @@ const listCategs = (client, message) => {
 };
 
 const listCommandsInCateg = (index, client, message) => {
+	if (!authorizedCateg(client.commandsTree[index].name, message.member, client))
+		return errorMessage("Vous n'avez pas la permission d'utiliser les commandes dans cette catégorie", message.channel);
 	let fields = [];
 	client.commandsTree[index].commands.forEach((cmd) => {
 		fields.push({
@@ -60,6 +61,8 @@ const listCommandsInCateg = (index, client, message) => {
 };
 
 const showCommandHelp = (cmd, client, message) => {
+	if (!authorizedCateg(client.commandsTree.find((ctg) => ctg.name === cmd.categ).name, message.member, client))
+		return errorMessage("Vous n'avez pas la permission d'utiliser cette commande", message.channel);
 	const exampleEmbed = new MessageEmbed()
 		.setColor(config.help.embedColor)
 		.setAuthor(`Help for ${config.prefix}${cmd.name}`, client.user.displayAvatarURL())
