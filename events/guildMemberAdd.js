@@ -17,7 +17,16 @@ module.exports = {
 			color: "#3f92bf",
 			footer: `Membre #${member.guild.memberCount}`,
 		});
+		createEventMessage({
+			text: `Hey ${member} bienvenue sur ${member.guild.name} ! Va faire un tour sur <#${welcome.rulesChannelId}> pour prendre connaissance du règlement et profite ! `,
+			imageUrl: member.user.displayAvatarURL(),
+			author: member.user.username,
+			color: "#3f92bf",
+			footer: `Membre #${member.guild.memberCount}`,
+			channel: welcome.welcomeChannel,
+		});
 
+		if (!role) return;
 		setTimeout(function () {
 			member.roles.add(role);
 		}, 10000);

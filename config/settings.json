@@ -1,25 +1,26 @@
 {
 	"prefix": "$",
 	"welcome": {
-		"welcomeChannel": 879618448735498291,
-		"welcomeRole": 876213742721974302
+		"welcomeChannel": "888866727948066832",
+		"welcomeRole": "888866727562207291",
+		"rulesChannelId": "888866727948066829"
 	},
 	"help": {
 		"embedColor": "#6e246a"
 	},
 	"logs": {
-		"logsChannel": 879618448735498291,
+		"logsChannel": "888866727948066834",
 		"logsFile": "process.log",
 		"cmdHistory": "commands.log",
-		"logsDeleteWhenStart" : true
+		"logsDeleteWhenStart": true
 	},
 	"giveaways": {
-		"channelId": 884494866841731084,
+		"channelId": "888866728472350804",
 		"embedColor": "#159753",
 		"embedWinColor": "#E34B00",
 		"embedListColor": "#DC8000"
 	},
 	"errorMessagesDeleteAfter": 10000,
 	"commandMessageDeleteAfter": 0,
-	"guildId": 876210790250741830
+	"guildId": "888866727562207283"
 }

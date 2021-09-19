@@ -16,5 +16,5 @@ module.exports.createEventMessage = (config) => {
 		.setTimestamp()
 		.setFooter(config.footer || client.user.username);
 
-	fetchChannel(logs.logsChannel).then((channel) => channel.send({ embeds: [eventEmbed] }));
+	fetchChannel(config.channel || logs.logsChannel).then((channel) => channel.send({ embeds: [eventEmbed] }));
 };
