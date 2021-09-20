@@ -6,12 +6,14 @@ module.exports = {
 	name: "channelCreate",
 	once: false,
 	execute: async (client, channel) => {
-		log(`New channel created: ${channel}`);
+		log(`New channel created: ${channel.name}`);
 
+		const chType = channel.type.replace("GUILD_", "").toLowerCase();
+		const chName = chType.slice(0, 1).toUpperCase() + chType.substring(1);
 		createEventMessage({
 			text: `**New channel created: ${channel} !**`,
 			color: "#3f92bf",
-			footer: `${channel.type.replace("GUILD_", "").toLowerCase()} channel`,
+			footer: `${chName} channel`,
 		});
 	},
 };

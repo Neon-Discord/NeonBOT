@@ -7,7 +7,7 @@ const { client } = require("../main");
 // @param client = the discord.js client
 module.exports.createEventMessage = (config) => {
 	if (!config.text) return;
-	imageUrl = config.imageUrl || client.user.defaultAvatarURL;
+	imageUrl = config.imageUrl || client.user.displayAvatarURL();
 	const eventEmbed = new MessageEmbed()
 		.setColor(config.color || "#43464a")
 		.setAuthor(config.author || `${client.user.username} event message`, imageUrl)

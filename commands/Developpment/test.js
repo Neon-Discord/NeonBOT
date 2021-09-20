@@ -1,10 +1,13 @@
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 const { createEventMessage } = require("../../utils/eventMessages");
 
 module.exports.run = async (client, message, args) => {
-	createEventMessage({
-		text: "Bonjour",
-	});
+	const avatarEmbed = new MessageEmbed().setImage(
+		client.user.displayAvatarURL({
+			dynamic: true,
+		})
+	);
+	message.channel.send(client.user.defaultAvatarURL);
 	// const rows = [];
 	// rows.push(
 	// 	new MessageActionRow().addComponents(
