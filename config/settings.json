@@ -1,5 +1,7 @@
 {
 	"prefix": "$",
+	"guildId": "888866727562207283",
+	"owner_id": "719547214719877121",
 	"welcome": {
 		"welcomeChannel": "888866727948066832",
 		"welcomeRole": "888866727562207291",
@@ -21,6 +23,5 @@
 		"embedListColor": "#DC8000"
 	},
 	"errorMessagesDeleteAfter": 10000,
-	"commandMessageDeleteAfter": 0,
-	"guildId": "888866727562207283"
+	"commandMessageDeleteAfter": 0
 }

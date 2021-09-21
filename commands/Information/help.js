@@ -19,6 +19,7 @@ module.exports.run = async (client, message, args) => {
 const authorizedCateg = (ctgName, mbr, client) => {
 	const category = client.commandsTree.find((ctg) => ctg.name === ctgName);
 	if (category.authorisation !== "" && !mbr.permissions.has(Permissions.FLAGS[category.authorisation])) return false;
+	return true;
 };
 
 const listCategs = (client, message) => {

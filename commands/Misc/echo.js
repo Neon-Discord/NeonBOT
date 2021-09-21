@@ -6,7 +6,7 @@ module.exports.help = {
 	name: "echo",
 	aliases: ["say", "repeat"],
 	description: "Resend your message",
-	usage: "echo <message>", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command> <message>", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "0", // sec
 	cooldownType: "", // 'user' || 'command'
 	authNeeded: "", // eg. KICK_MEMBERS

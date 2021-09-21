@@ -2,6 +2,7 @@ const settings = require("../config/settings.json");
 const { Permissions } = require("discord.js");
 const { cmdLog } = require("../utils/cmdHistory");
 const { errorMessage } = require("../utils/infoMessages");
+const { db } = require("../utils/dbInit");
 
 module.exports = {
 	name: "messageCreate",
@@ -11,6 +12,9 @@ module.exports = {
 		if (message.author.bot) return;
 		if (message.channel.type === "dm") return;
 		if (!message.guild.id === settings.guildId) return;
+
+		const muted_users = db.getData("/mutedMbrs");
+		if (muted_users.length > 0 && muted_users.includes(message.author.id)) return message.delete();
 
 		// Checks if the message is not in the responding_value array
 		if (client.responding_list.has(`${message.channel.id}||${message.author.id}`)) {

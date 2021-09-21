@@ -1,5 +1,6 @@
 const { JsonDB } = require("node-json-db");
 const { Config } = require("node-json-db/dist/lib/JsonDBConfig");
+const { log } = require("./log");
 
 // The first argument is the database filename. If no extension, '.json' is assumed and automatically added.
 // The second argument is used to tell the DB to save after each push
@@ -8,8 +9,13 @@ const { Config } = require("node-json-db/dist/lib/JsonDBConfig");
 // The last argument is the separator. By default it's slash (/)
 const db = new JsonDB(new Config(".bot-cache", true, true, "/"));
 
-if (!db.getData("/").giveaways) {
-	db.push("/giveaways", []);
-}
+const initTree = ["giveaways", "mutedMbrs", "giveawaysban"];
+
+initTree.forEach((tree) => {
+	if (!db.getData("/")[tree]) {
+		db.push(`/${tree}`, []);
+		log(`${tree} database path initialized !`);
+	}
+});
 
 module.exports.db = db;

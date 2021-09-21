@@ -6,7 +6,7 @@ module.exports.help = {
 	name: "ping",
 	aliases: [],
 	description: "Resend pong !",
-	usage: "ping", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command>", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "0", // sec
 	cooldownType: "", // 'user' || 'command'
 	authNeeded: "", // eg. KICK_MEMBERS
