@@ -1,5 +1,6 @@
 const { errorMessagesDeleteAfter } = require("../config/settings.json");
 const { MessageEmbed } = require("discord.js");
+const { log } = require("../utils/log");
 
 module.exports.errorMessage = async (text, channel) => {
 	return channel
@@ -8,7 +9,7 @@ module.exports.errorMessage = async (text, channel) => {
 		})
 		.then((sentMessage) =>
 			setTimeout(() => {
-				if (!sentMessage.deleted) sentMessage.delete();
+				sentMessage.delete().catch(log("Failed to delete message !"));
 			}, errorMessagesDeleteAfter)
 		);
 };
