@@ -12,15 +12,15 @@ module.exports = {
 		log(`${client.user.username} is online !`);
 
 		// Error handling
-		process.on("unhandledRejection", (error) => {
-			log("Unhandled promise rejection:", error);
-			createEventMessage({
-				color: "#FF2255",
-				author: "NeonBOT internal error",
-				text: `<@${settings.owner_id}> : ${JSON.stringify(error)}`,
-				footer: error.name,
-			});
-		});
+		// process.on("unhandledRejection", (error) => {
+		// 	log("Unhandled promise rejection:", error);
+		// 	createEventMessage({
+		// 		color: "#FF2255",
+		// 		author: "NeonBOT internal error",
+		// 		text: `<@${settings.owner_id}> : ${JSON.stringify(error)}`,
+		// 		footer: error.name,
+		// 	});
+		// });
 
 		// Fetch giveaway messages to recieve the MessageReactionAdd event
 		const channel = await fetchChannel(settings.giveaways.channelId);

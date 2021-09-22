@@ -9,7 +9,7 @@ const { log } = require("./log");
 // The last argument is the separator. By default it's slash (/)
 const db = new JsonDB(new Config(".bot-cache", true, true, "/"));
 
-const initTree = ["giveaways", "mutedMbrs", "giveawaysban"];
+const initTree = ["giveaways", "mutedMbrs", "giveawaysban", "infochannels"];
 
 initTree.forEach((tree) => {
 	if (!db.getData("/")[tree]) {

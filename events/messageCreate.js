@@ -45,12 +45,12 @@ module.exports = {
 		cmdLog(message.author.tag, command, args);
 
 		// Delete the command message if needed
-		if (commandfile.help.delete) {
-			var msgcopy = message;
-			setTimeout(() => {
-				if (!msgcopy.deleted) msgcopy.delete();
-			}, settings.commandMessageDeleteAfter || 0);
-		}
+		// if (commandfile.help.delete) {
+		// 	var msgcopy = message;
+		// 	setTimeout(() => {
+		// 		if (!msgcopy.deleted) msgcopy.delete();
+		// 	}, settings.commandMessageDeleteAfter || 0);
+		// }
 
 		// Check permissions
 		const permNeeded = commandCateg.authorisation;
