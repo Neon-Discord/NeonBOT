@@ -79,15 +79,11 @@ const showCommandHelp = (cmd, client, message) => {
 			},
 			{
 				name: "Aliases :",
-				value: `\`${config.prefix + cmd.aliases.join(", " + config.prefix)}\``,
+				value: `\`${cmd.aliases.length ? config.prefix + cmd.aliases.join(", " + config.prefix) : "No aliases"}\``,
 			},
 			{
 				name: `Cooldown: ${cmd.cooldown > 0 ? cmd.cooldown + "sec" : "No Cooldown"}`,
 				value: `Cooldown type: ${cmd.cooldown > 0 ? cmd.cooldownType : "No Cooldown"}`,
-			},
-			{
-				name: "Permission needed",
-				value: `${cmd.authNeeded != "" ? cmd.authNeeded : "No permission required"}`,
 			},
 		]);
 
