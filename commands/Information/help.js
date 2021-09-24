@@ -97,7 +97,6 @@ module.exports.help = {
 	usage: "<command> [command || category]",
 	cooldown: "2", // sec
 	cooldownType: "user", // 'user' || 'command'
-	authNeeded: "", // eg. KICK_MEMBERS
 	delete: true,
 	mention: false,
 	args: false,

@@ -27,8 +27,7 @@ module.exports.run = async (client, message, args) => {
 			wait_for_response: true,
 		};
 	} else if (action == "finish") {
-		if (args.length < 2 || args[1].length != 3)
-			return errorMessage(`Vous devez passer en argument l'ID du giveaway concerné`, message.channel);
+		if (args.length < 2 || args[1].length != 3) return errorMessage(`Vous devez passer en argument l'ID du giveaway concerné`, message.channel);
 		const giv_id = db.getIndex("/giveaways", parseInt(args[1]), "id");
 		if (giv_id == -1)
 			// default search based on the id parameter
@@ -67,11 +66,7 @@ module.exports.run = async (client, message, args) => {
 		const giveaways_list = db.getData("/giveaways");
 		if (giveaways_list.length < 1)
 			return message.channel.send({
-				embeds: [
-					new MessageEmbed()
-						.setColor(settings.giveaways.embedListColor)
-						.setDescription(`Il n'y a aucun giveaway d'ouvert !`),
-				],
+				embeds: [new MessageEmbed().setColor(settings.giveaways.embedListColor).setDescription(`Il n'y a aucun giveaway d'ouvert !`)],
 			});
 		const fields = giveaways_list.map((giv) => {
 			return {
@@ -80,12 +75,7 @@ module.exports.run = async (client, message, args) => {
 			};
 		});
 		message.channel.send({
-			embeds: [
-				new MessageEmbed()
-					.setColor(settings.giveaways.embedListColor)
-					.setTitle("Liste des giveaways ouverts")
-					.addFields(fields),
-			],
+			embeds: [new MessageEmbed().setColor(settings.giveaways.embedListColor).setTitle("Liste des giveaways ouverts").addFields(fields)],
 		});
 	}
 };
@@ -136,7 +126,6 @@ module.exports.help = {
 	usage: "<command> create||list||finish [id]", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "1", // sec
 	cooldownType: "command", // 'user' || 'command'
-	authNeeded: "ADMINISTRATOR", // eg. KICK_MEMBERS
 	delete: true,
 	mention: false,
 	args: true,

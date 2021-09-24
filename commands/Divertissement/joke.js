@@ -51,7 +51,6 @@ module.exports.help = {
 	usage: "<command> [categorie: GLOBAL | DEV | DARK | LIMIT | BEAUF | BLONDES] || [en]", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "10", // sec
 	cooldownType: "user", // 'user' || 'command'
-	authNeeded: "", // eg. KICK_MEMBERS
 	delete: true,
 	mention: false,
 	args: false,

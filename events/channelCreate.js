@@ -11,7 +11,8 @@ module.exports = {
 		const chType = channel.type.replace("GUILD_", "").toLowerCase();
 		const chName = chType.slice(0, 1).toUpperCase() + chType.substring(1);
 		createEventMessage({
-			text: `**New channel created: ${channel} !**`,
+			author: "Nouveau salon",
+			text: `Nouveau salon créé : ${channel} !`,
 			color: "#3f92bf",
 			footer: `${chName} channel`,
 		});

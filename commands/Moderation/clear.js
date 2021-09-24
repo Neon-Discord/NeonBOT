@@ -15,7 +15,6 @@ module.exports.help = {
 	usage: "<command> [number of messages]", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "2", // sec
 	cooldownType: "user", // 'user' || 'command'
-	authNeeded: "MANAGE_MESSAGES", // eg. KICK_MEMBERS
 	delete: false,
 	mention: false,
 	args: false,

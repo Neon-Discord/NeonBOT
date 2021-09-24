@@ -9,7 +9,6 @@ module.exports.help = {
 	usage: "<command> <message>", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "0", // sec
 	cooldownType: "", // 'user' || 'command'
-	authNeeded: "", // eg. KICK_MEMBERS
 	delete: true,
 	mention: false,
 	args: true,

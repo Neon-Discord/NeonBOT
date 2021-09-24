@@ -1,3 +1,4 @@
 {
-	"token": "YOUR_TOKEN_HERE"
+	"token": "YOUR_TOKEN_HERE",
+	"blagues_api_token": "YOUR_TOKEN_HERE"
 }
