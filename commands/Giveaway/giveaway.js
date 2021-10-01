@@ -1,7 +1,7 @@
 const settings = require("../../config/settings.json");
 const { fetchChannel } = require("../../utils/fetchChannel");
 const { db } = require("../../utils/dbInit");
-const { errorMessage, promptMessage, infoMessage } = require("../../utils/infoMessages");
+const { errorMessage, promptMessage, infoMessage, successMessage } = require("../../utils/infoMessages");
 const { MessageEmbed } = require("discord.js");
 const { log } = require("../../utils/log");
 
@@ -31,12 +31,12 @@ module.exports.run = async (client, message, args) => {
 		const giv_id = db.getIndex("/giveaways", parseInt(args[1]), "id");
 		if (giv_id == -1)
 			// default search based on the id parameter
-			return errorMessage("Veuillez saisir un ID de message valide !", message.channel);
+			return errorMessage("Veuillez saisir un ID de giveaway valide !", message.channel);
 		const giveaway = db.getData(`/giveaways[${giv_id}]`);
 		const users = giveaway.participants;
 		const guild = client.guilds.cache.find((g) => g.id == settings.guildId);
 
-		if (users.length < 1) return errorMessage("Aucun utilisateur n'a participé à ca giveaway !", message.channel);
+		if (users.length < 1) return errorMessage("Aucun utilisateur n'a participé à ce giveaway !", message.channel);
 		let winner = guild.members.cache.get(users[Math.floor(Math.random() * users.length)]);
 		while (!winner) {
 			winner = guild.members.cache.get(users[Math.floor(Math.random() * users.length)]);
@@ -60,8 +60,10 @@ module.exports.run = async (client, message, args) => {
 					.setFooter(`${users.length} Participant(s)`),
 			],
 		});
-		log(`Giveaway closed: ${giveaway.id}`);
 		db.delete(`/giveaways[${giv_id}]`);
+
+		successMessage(`Giveaway \`${args[1]}\` terminé !`, message.channel);
+		log(`Giveaway closed: ${giveaway.id}`);
 	} else if (action == "list") {
 		const giveaways_list = db.getData("/giveaways");
 		if (giveaways_list.length < 1)
@@ -93,6 +95,15 @@ module.exports.responding = async (client, message, messageContent) => {
 			wait_for_response: true,
 		};
 	}
+	if (!emo_test(giv_array[1])) {
+		promptMessage(
+			"Forme invalide, veuillez suivre l'exemple donné :\n ```Un abonnement nitro 1 an||👍```\nVous pouvez aussi taper `cancel` pour annuler",
+			message.channel
+		);
+		return {
+			wait_for_response: true,
+		};
+	}
 
 	const giv_channel = await fetchChannel(settings.giveaways.channelId);
 	let id = 111;
@@ -107,7 +118,7 @@ module.exports.responding = async (client, message, messageContent) => {
 				.setAuthor("Giveaway")
 				.setDescription(`Crée par ${message.author}`)
 				.addField(`Réact ${giv_array[1]} pour gagner:`, giv_array[0])
-				.setFooter(`ÌD: ${id}`),
+				.setFooter(`ID: ${id}`),
 		],
 	});
 	sent_msg.react(giv_array[1]);
@@ -117,8 +128,16 @@ module.exports.responding = async (client, message, messageContent) => {
 		gift: giv_array[0],
 		participants: [],
 	});
-	console.log(db.getData("/giveaways"));
+	successMessage(`Giveaway crée !\nSon id est \`${id}\``, message.channel);
 };
+
+const emoji_regex =
+	/^(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])+$/;
+
+const emo_test = (str) => {
+	return emoji_regex.test(str);
+};
+
 module.exports.help = {
 	name: "giveaway",
 	aliases: [],

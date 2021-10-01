@@ -29,6 +29,13 @@ module.exports = {
 			channel.messages.fetch(giv.id).then(console.log());
 		});
 
+		// Fetch reactroles messages to recieve the MessageReactionAdd event
+		const rr_channel = await fetchChannel(settings.reactrole.channelId);
+		const reactroles = db.getData("/giveaways");
+		reactroles.forEach((giv) => {
+			rr_channel.messages.fetch(giv.id).then(console.log());
+		});
+
 		client.user.setActivity(`${settings.prefix}help`, { type: "PLAYING" });
 	},
 };

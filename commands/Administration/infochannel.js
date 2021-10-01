@@ -9,9 +9,7 @@ module.exports.run = async (client, message, args) => {
 
 	if (!args[0] || !["create", "list", "remove"].includes(action))
 		return errorMessage(
-			"Vous devez fournir une action à effectuer ainsi que l'ID du giveaway si nécessaire: `" +
-				this.help.usage.replace("<command>", this.help.name) +
-				"`",
+			"Vous devez fournir une action à effectuer :\n`" + this.help.usage.replace("<command>", this.help.name) + "`",
 			message.channel
 		);
 
@@ -119,7 +117,7 @@ module.exports.help = {
 	name: "infochannel",
 	aliases: [],
 	description: "Create infochannels",
-	usage: "<command> create", // '[]' for not necessary args and '||' for OR symbol
+	usage: "<command> create || remove || list", // '[]' for not necessary args and '||' for OR symbol
 	cooldown: "10", // sec
 	cooldownType: "command", // 'user' || 'command'
 	delete: true,

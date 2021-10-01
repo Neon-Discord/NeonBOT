@@ -12,7 +12,7 @@ module.exports = {
 			text: `**${member} a quitté le serveur !**`,
 			imageUrl: member.user.displayAvatarURL(),
 			author: member.user.username,
-			color: "#ebdb2f",
+			color: "#D9000C",
 			footer: `Membres: ${member.guild.memberCount}`,
 		});
 	},

@@ -22,6 +22,10 @@
 		"embedWinColor": "#E34B00",
 		"embedListColor": "#DC8000"
 	},
+	"reactrole": {
+		"embedColor": "#28E206",
+		"channelId": "888866728472350802"
+	},
 	"errorMessagesDeleteAfter": 10000,
 	"commandMessageDeleteAfter": 0
 }
