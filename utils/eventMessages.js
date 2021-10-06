@@ -1,7 +1,7 @@
-const { logs } = require("../config/settings.json");
+const { logs } = reqlib("/utils/settingsManager/get")();
 const { MessageEmbed } = require("discord.js");
-const { fetchChannel } = require("./fetchChannel");
-const { client } = require("../main");
+const { fetchChannel } = reqlib("/utils/fetchChannel");
+const { client } = reqlib("/main.js");
 
 // @param config = {channel, text, imageUrl, color, footer, author}
 module.exports.createEventMessage = (config) => {

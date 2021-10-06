@@ -1,6 +1,6 @@
-const { errorMessagePersistent } = require("../../utils/infoMessages");
-const { log } = require("../../utils/log");
-const { db } = require("../../utils/dbInit");
+const { errorMessagePersistent } = reqlib("/utils/infoMessages");
+const { log } = reqlib("/utils/log");
+const { db } = reqlib("/utils/dbInit");
 
 module.exports.rrCreate = async (client, reaction, user) => {
 	// Checks if message is a giveaway

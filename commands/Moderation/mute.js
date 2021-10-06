@@ -1,6 +1,6 @@
-const { db } = require("../../utils/dbInit");
+const { db } = reqlib("/utils/dbInit");
 const { successMessage, errorMessage } = require("../../utils/infoMessages");
-const { owner_id } = require("../../config/settings.json");
+const { owner_id } = reqlib("/utils/settingsManager/get")();
 
 module.exports.run = async (client, message, args) => {
 	if (message.mentions.users.first().id == owner_id) return errorMessage("Permissions manquantes", message.channel);

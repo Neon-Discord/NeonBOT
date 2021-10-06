@@ -1,5 +1,7 @@
+const {logMessage} = reqlib('/utils/infoMessages')
+
 module.exports.run = async (client, message, args) => {
-	if (args.length > 0) message.channel.send(args.join(" "));
+	if (args.length > 0) logMessage(args.join(' '), message.channel)
 };
 
 module.exports.help = {

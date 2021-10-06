@@ -1,5 +1,5 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
-const { createEventMessage } = require("../../utils/eventMessages");
+const { createEventMessage } = reqlib("/utils/eventMessages");
 
 module.exports.run = async (client, message, args) => {
 	const avatarEmbed = new MessageEmbed().setImage(

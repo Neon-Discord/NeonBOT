@@ -1,14 +1,14 @@
-const settings = require("../config/settings.json");
 const { Permissions } = require("discord.js");
-const { cmdLog } = require("../utils/cmdHistory");
-const { errorMessage } = require("../utils/infoMessages");
-const { db } = require("../utils/dbInit");
-const { log } = require("../utils/log");
+const { cmdLog } = reqlib("/utils/cmdHistory");
+const { errorMessage } = reqlib("/utils/infoMessages");
+const { db } = reqlib("/utils/dbInit");
+const { log } = reqlib("/utils/log");
 
 module.exports = {
 	name: "messageCreate",
 	once: false,
 	execute: async (client, message) => {
+		const settings = reqlib("/utils/settingsManager/get")();
 		// Verify if the message is from normal account in the target server
 		if (message.author.bot) return;
 		if (message.channel.type === "dm") return;

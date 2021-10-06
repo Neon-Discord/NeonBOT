@@ -1,5 +1,5 @@
 const os = require("os");
-const { infoMessage } = require("../../utils/infoMessages");
+const { infoMessage } = reqlib("/utils/infoMessages");
 module.exports.run = async (client, message, args) => {
 	infoMessage(`**Hostname:** ${os.hostname()}`, message.channel);
 };

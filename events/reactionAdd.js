@@ -1,5 +1,5 @@
-const { giveawayCreate } = require("./events_utils/giveaway");
-const { rrCreate } = require("./events_utils/reactrole");
+const { giveawayCreate } = reqlib("/events/events_utils/giveaway");
+const { rrCreate } = reqlib("/events/events_utils/reactrole");
 
 module.exports = {
 	name: "messageReactionAdd",

@@ -1,17 +1,20 @@
+// Root dir
+global.reqlib = require('app-root-path').require;
+
 // Config
-const config = require("./config/config.json");
-const { logs } = require("./config/settings.json");
+const config = reqlib("/config/config.json");
+const { logs } = reqlib("/utils/settingsManager/get")();
 
 // Require
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
 
 // Utils
-const { clear } = require("./utils/log");
+const { clear } = reqlib("/utils/log");
 if (logs.logsDeleteWhenStart) clear();
-const { clearHistory } = require("./utils/cmdHistory");
+const { clearHistory } = reqlib("/utils/cmdHistory");
 clearHistory();
-const Infobox = require("./utils/infobox");
+const Infobox = reqlib("/utils/infobox");
 
 // Init the client
 const client = new Client({

@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
-const { db } = require("../../utils/dbInit");
-const { successMessage, errorMessage, infoMessage } = require("../../utils/infoMessages");
-const { prefix } = require("../../config/settings.json");
+const { db } = reqlib("/utils/dbInit");
+const { successMessage, errorMessage, infoMessage } = reqlib("/utils/infoMessages");
+const { prefix } = reqlib("/utils/settingsManager/get")();
 
 module.exports.run = async (client, message, args) => {
 	const muted_users = db.getData("/mutedMbrs");

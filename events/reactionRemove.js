@@ -1,5 +1,5 @@
-const { giveawayDelete } = require("./events_utils/giveaway");
-const { rrDelete } = require("./events_utils/reactrole");
+const { giveawayDelete } = reqlib("/events/events_utils/giveaway");
+const { rrDelete } = reqlib("/events/events_utils/reactrole");
 
 module.exports = {
 	name: "messageReactionRemove",

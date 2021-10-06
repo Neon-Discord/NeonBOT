@@ -1,7 +1,7 @@
-const { db } = require("../../utils/dbInit");
-const { errorMessage, promptMessage, infoMessage, successMessage } = require("../../utils/infoMessages");
-const { createEventMessage } = require("../../utils/eventMessages");
-const { reactrole } = require("../../config/settings.json");
+const { db } = reqlib("/utils/dbInit");
+const { errorMessage, promptMessage, infoMessage, successMessage } = reqlib("/utils/infoMessages");
+const { createEventMessage } = reqlib("/utils/eventMessages");
+const { reactrole } = reqlib("/utils/settingsManager/get")();
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args) => {

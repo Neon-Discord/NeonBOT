@@ -1,6 +1,6 @@
 const { MessageEmbed, Permissions, MessageActionRow, MessageButton } = require("discord.js");
-const config = require("../../config/settings.json");
-const { errorMessage } = require("../../utils/infoMessages");
+const config = reqlib("/utils/settingsManager/get")();
+const { errorMessage } = reqlib("/utils/infoMessages");
 
 const msgCloseButton = new MessageActionRow().addComponents(new MessageButton().setCustomId("close").setLabel("J'ai compris !").setStyle("PRIMARY"));
 

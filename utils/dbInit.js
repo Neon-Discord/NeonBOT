@@ -1,6 +1,6 @@
 const { JsonDB } = require("node-json-db");
 const { Config } = require("node-json-db/dist/lib/JsonDBConfig");
-const { log } = require("./log");
+const { log } = reqlib("/utils/log");
 
 // The first argument is the database filename. If no extension, '.json' is assumed and automatically added.
 // The second argument is used to tell the DB to save after each push

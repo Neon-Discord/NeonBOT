@@ -1,6 +1,6 @@
-const { owner_id } = require("../../config/settings.json");
-const { db } = require("../../utils/dbInit");
-const { errorMessage, successMessage } = require("../../utils/infoMessages");
+const { owner_id } = reqlib("/utils/settingsManager/get")();
+const { db } = reqlib("/utils/dbInit");
+const { errorMessage, successMessage } = reqlib("/utils/infoMessages");
 
 // To the fetching section, see the ready event
 

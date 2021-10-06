@@ -1,4 +1,4 @@
-const { errorMessage, successMessage } = require("../../utils/infoMessages");
+const { errorMessage, successMessage } = reqlib("/utils/infoMessages");
 
 module.exports.run = async (client, message, args) => {
 	let member = message.mentions.members.first();

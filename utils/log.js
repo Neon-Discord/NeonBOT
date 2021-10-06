@@ -1,4 +1,4 @@
-const { logs } = require("../config/settings.json");
+const { logs } = reqlib("/utils/settingsManager/get")();
 const fs = require("fs");
 // Import a package to read the last lines of log file
 const readLastLines = require("read-last-lines");

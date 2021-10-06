@@ -1,8 +1,8 @@
-const settings = require("../config/settings.json");
-const { log } = require("../utils/log");
-const { db } = require("../utils/dbInit");
-const { fetchChannel } = require("../utils/fetchChannel");
-const { createEventMessage } = require("../utils/eventMessages");
+const settings = reqlib("/utils/settingsManager/get")();
+const { log } = reqlib("/utils/log");
+const { db } = reqlib("/utils/dbInit");
+const { fetchChannel } = reqlib("/utils/fetchChannel");
+const { createEventMessage } = reqlib("/utils/eventMessages");
 
 module.exports = {
 	name: "ready",

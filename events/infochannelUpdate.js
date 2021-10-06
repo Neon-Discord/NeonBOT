@@ -1,7 +1,7 @@
-const { welcome } = require("../config/settings.json");
-const { log } = require("../utils/log");
-const { createEventMessage } = require("../utils/eventMessages");
-const { db } = require("../utils/dbInit");
+const { welcome } = reqlib("/utils/settingsManager/get")();
+const { log } = reqlib("/utils/log");
+const { createEventMessage } = reqlib("/utils/eventMessages");
+const { db } = reqlib("/utils/dbInit");
 
 module.exports = {
 	name: "guildMemberUpdate",

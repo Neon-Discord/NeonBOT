@@ -1,6 +1,6 @@
-const { welcome } = require("../config/settings.json");
-const { log } = require("../utils/log");
-const { createEventMessage } = require("../utils/eventMessages");
+const { welcome } = reqlib("/utils/settingsManager/get")();
+const { log } = reqlib("/utils/log");
+const { createEventMessage } = reqlib("/utils/eventMessages");
 
 module.exports = {
 	name: "guildMemberAdd",

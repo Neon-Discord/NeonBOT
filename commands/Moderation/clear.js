@@ -1,4 +1,4 @@
-const { successMessage } = require("../../utils/infoMessages");
+const { successMessage } = reqlib("/utils/infoMessages");
 
 module.exports.run = async (client, message, args) => {
 	let amount = args[0] <= 100 && args[0] >= 1 ? parseInt(args[0]) + 1 : 100;

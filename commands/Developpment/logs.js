@@ -1,5 +1,5 @@
-const { logMessage } = require("../../utils/infoMessages");
-const { getLogs } = require("../../utils/log");
+const { logMessage } = reqlib("/utils/infoMessages");
+const { getLogs } = reqlib("/utils/log");
 
 module.exports.run = async (client, message, args) => {
 	let nbLines = 10;

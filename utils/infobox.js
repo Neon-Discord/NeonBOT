@@ -1,4 +1,4 @@
-const { log } = require("./log");
+const { log } = reqlib("/utils/log");
 
 class Infobox {
 	constructor(options) {

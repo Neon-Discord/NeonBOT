@@ -1,6 +1,6 @@
-const { errorMessagesDeleteAfter } = require("../config/settings.json");
+const { errorMessagesDeleteAfter } = reqlib("/utils/settingsManager/get")();
 const { MessageEmbed } = require("discord.js");
-const { log } = require("../utils/log");
+const { log } = reqlib("/utils/log");
 
 module.exports.errorMessage = async (text, channel) => {
 	return channel.send({

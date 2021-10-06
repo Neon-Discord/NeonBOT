@@ -1,9 +1,9 @@
-const settings = require("../../config/settings.json");
-const { fetchChannel } = require("../../utils/fetchChannel");
-const { db } = require("../../utils/dbInit");
-const { errorMessage, promptMessage, infoMessage, successMessage } = require("../../utils/infoMessages");
+const settings = reqlib("/utils/settingsManager/get")();
+const { fetchChannel } = reqlib("/utils/fetchChannel");
+const { db } = reqlib("/utils/dbInit");
+const { errorMessage, promptMessage, infoMessage, successMessage } = reqlib("/utils/infoMessages");
 const { MessageEmbed } = require("discord.js");
-const { log } = require("../../utils/log");
+const { log } = reqlib("/utils/log");
 
 // To the fetching section, see the ready event
 

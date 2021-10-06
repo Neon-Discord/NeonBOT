@@ -1,5 +1,5 @@
-const { db } = require("../../utils/dbInit");
-const { successMessage, errorMessage } = require("../../utils/infoMessages");
+const { db } = reqlib("/utils/dbInit");
+const { successMessage, errorMessage } = reqlib("/utils/infoMessages");
 
 module.exports.run = async (client, message, args) => {
 	let muted_users = db.getData("/mutedMbrs");

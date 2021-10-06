@@ -1,4 +1,4 @@
-const config = require("../../config/config.json");
+const config = reqlib("/config/config.json");
 var oneLinerJoke = require("one-liner-joke");
 
 // Checks if the token is set
@@ -11,7 +11,7 @@ if (config.blagues_api_token) {
 	disable_fr = true;
 }
 
-const { infoMessage, errorMessage } = require("../../utils/infoMessages");
+const { infoMessage, errorMessage } = reqlib("/utils/infoMessages");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
