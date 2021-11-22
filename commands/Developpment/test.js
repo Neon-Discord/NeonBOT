@@ -2,12 +2,12 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 const { createEventMessage } = reqlib("/utils/eventMessages");
 
 module.exports.run = async (client, message, args) => {
-	const avatarEmbed = new MessageEmbed().setImage(
-		client.user.displayAvatarURL({
-			dynamic: true,
-		})
-	);
-	message.channel.send(client.user.defaultAvatarURL);
+	// const avatarEmbed = new MessageEmbed().setImage(
+	// 	client.user.displayAvatarURL({
+	// 		dynamic: true,
+	// 	})
+	// );
+	// message.channel.send(client.user.defaultAvatarURL);
 	// const rows = [];
 	// rows.push(
 	// 	new MessageActionRow().addComponents(

@@ -37,5 +37,7 @@ module.exports = {
 		});
 
 		client.user.setActivity(`${settings.prefix}help`, { type: "PLAYING" });
+
+		reqlib("/exec_start.js").run(client);
 	},
 };
